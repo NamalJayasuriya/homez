@@ -110,18 +110,16 @@ public class SwitchListActivity extends Activity {
         initUi();
         setupActionBar();
         popUpSwitchList();
-/*
-<<<<<<< HEAD
+
         //set the switches to the last exit stage
-        for(Switch aSwitch:switchList){
-            aSwitch.setStatus(aSwitch.getStatus()==1? 0:1);
-=======
-        for (Switch aSwitch : switchList) {
->>>>>>> 8b2e1d7e0cbf7f0c9232a23caed9375a75bbd93c
-            doPut(aSwitch);
-        }
-*/
-        doGet(switchList, true);
+
+       /* for(Switch aSwitch:switchList)
+            aSwitch.setStatus(aSwitch.getStatus()==1? 0:1);*/
+
+
+
+
+        //doGet(switchList, true);
     }
 
     /**
@@ -182,7 +180,13 @@ public class SwitchListActivity extends Activity {
     public void popUpSwitchList() {
         // Create sample list now
         switchList = (ArrayList<Switch>) new HomezDbSource(this).getAllSwitches();
+        if(switchList.isEmpty()){
 
+            for(int i=1;i<9;i++){
+                Switch s =new Switch("switch  "+i ,i%2);
+                switchList.add(s);
+            }
+        }
         switchListAdapter = new SwitchListAdapter(switchList, this);
         switchListAdapter.notifyDataSetChanged();
         switchListView.setAdapter(switchListAdapter);
